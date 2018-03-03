@@ -1,0 +1,38 @@
+http://blog.csdn.net/seafishyls/article/details/44546809
+
+192:~ star$ sudo apachectl -v
+Password:
+Server version: Apache/2.4.28 (Unix)
+Server built:   Oct  9 2017 19:54:20
+192:~ star$ sudo apachectl start
+
+Win		-> C:\Apache\htdocs
+MAC OS	-> /资源库/WebServer/Documents/
+
+192:/ star$ cd /Library/WebServer/Documents/
+192:Documents star$ ls -laF
+total 72
+drwxr-xr-x  6 root  wheel    192 11 14 22:46 ./
+drwxr-xr-x  5 root  wheel    160  7 16  2017 ../
+-rw-r--r--  1 root  wheel   3726  7 16  2017 PoweredByMacOSX.gif
+-rw-r--r--  1 root  wheel  31958  7 16  2017 PoweredByMacOSXLarge.gif
+-rw-r--r--  1 root  wheel     45  6 12  2007 index.html.en
+-rw-r--r--  1 root  wheel     45  6 12  2007 index.html.en~orig
+
+192:Documents star$ sudo vi get_data.xml
+Password:
+192:Documents star$ ls -laF
+total 80
+drwxr-xr-x  7 root  wheel    224  2 16 19:53 ./
+drwxr-xr-x  5 root  wheel    160  7 16  2017 ../
+-rw-r--r--  1 root  wheel   3726  7 16  2017 PoweredByMacOSX.gif
+-rw-r--r--  1 root  wheel  31958  7 16  2017 PoweredByMacOSXLarge.gif
+-rw-r--r--  1 root  wheel    421  2 16 19:53 get_data.xml
+-rw-r--r--  1 root  wheel     45  6 12  2007 index.html.en
+-rw-r--r--  1 root  wheel     45  6 12  2007 index.html.en~orig
+
+Request request = new Request.Builder()
+                        .url("http://192.168.1.168/get_data.xml")
+                        .build();
+
+192:~ star$ sudo apachectl stop
