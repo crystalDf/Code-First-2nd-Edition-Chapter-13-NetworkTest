@@ -1,6 +1,11 @@
 package com.star.networktest;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,11 +74,31 @@ public class HttpUtil {
 
     public static void sendOkHttpRequest(String address, Callback callback) {
 
+        Context context = MyApplication.getContext();
+
+        if (!isNetworkAvailableAndConnected(context)) {
+            Toast.makeText(context, "network is unavailable", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(address)
                 .build();
 
         okHttpClient.newCall(request).enqueue(callback);
+    }
+
+    private static boolean isNetworkAvailableAndConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager == null) {
+            return false;
+        }
+
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
